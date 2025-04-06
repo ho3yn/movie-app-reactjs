@@ -96,7 +96,7 @@ export default function App() {
           `http://www.omdbapi.com/?apikey=${KEY}&i=${openmovie}`
         );
         const data = await res.json();
-        console.log(data);
+        //console.log(data);
 
         setmoviedatabyid(data);
       } catch (error) {
@@ -305,17 +305,24 @@ function Openmovie({ watched, moviedatabyid, closemovie, Addtolisfunc }) {
     }
     //console.log(iswatched);
   });
+  console.log(moviedatabyid);
+  let datatoadd = {};
 
-  const datatoadd = {
-    imdbID: moviedatabyid.imdbID,
-    Title: moviedatabyid.Title,
-    Year: moviedatabyid.Year,
-    Poster: moviedatabyid.Poster,
-    runtime: Number(moviedatabyid.Runtime.split(" ").at(0)),
-    imdbRating: Number(moviedatabyid.imdbRating),
-    userRating: rate,
-  };
-  //console.log(Number(moviedatabyid.Runtime.split(" ").at(0)));
+  function datamaker() {
+    if (moviedatabyid) {
+      //console.log(moviedatabyid);
+      datatoadd = {
+        imdbID: moviedatabyid.imdbID,
+        Title: moviedatabyid.Title,
+        Year: moviedatabyid.Year,
+        Poster: moviedatabyid.Poster,
+        //runtime: Number(moviedatabyid.Runtime.split(" ").at(0)),
+        imdbRating: Number(moviedatabyid.imdbRating),
+        userRating: rate,
+      };
+    }
+  }
+  datamaker();
 
   return (
     <div className="details">
